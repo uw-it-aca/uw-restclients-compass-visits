@@ -1,0 +1,4 @@
+[run]
+branch = True
+source = uw_compass_visits
+include = uw_compass_visits/*

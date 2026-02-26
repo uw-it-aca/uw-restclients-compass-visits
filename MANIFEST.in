@@ -1,0 +1,2 @@
+include uw_compass_visits/VERSION
+recursive-include uw_compass_visits *
