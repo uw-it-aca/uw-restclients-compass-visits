@@ -1,0 +1,17 @@
+{
+    "program_areas": [
+        {"id": 1, "name": "Program Area 1"},
+        {"id": 2, "name": "Program Area 2"},
+        {"id": 3, "name": "Program Area 3"},
+        {"id": 4, "name": "Program Area 4"}
+    ],
+    "tutoring_options": [
+        {"id": 1, "name": "Tutoring Option 1"},
+        {"id": 2, "name": "Tutoring Option 2"},
+        {"id": 3, "name": "Tutoring Option 3"}
+    ],
+    "writing_services": [
+        {"id": 1, "name": "Writing Service 1"},
+        {"id": 2, "name": "Writing Service 2"}
+    ]
+}

@@ -26,22 +26,23 @@ class CompassVisits(object):
         """
         Returns a list of visits for the given uw netid.
         """
-        try:
-            url = "{}/studentvisits/{}/".format(self.API, uwnetid)
-            response = self.dao.getURL(url)
-            visits = [Visit.from_json(v) for v in json.loads(response.data)]
-            return visits
-        except DataFailureException as ex:
-            logging.error("Error getting visits for student {}: {}"
-                          .format(uwnetid, ex))
-            raise
+        url = "{}/studentvisits/{}".format(self.API, uwnetid)
+        response = self.dao.getURL(url)
+        if response.status != 200:
+            raise DataFailureException(url,
+                                       response.status,
+                                       "Error getting visits for student "
+                                       "{}: {}".format(uwnetid,
+                                                       response.status))
+        visits = [Visit.from_json(v) for v in json.loads(response.data)]
+        return visits
 
     def get_visit_admin_list(self):
         """
         Returns a list of all visits for admin users.
         """
         try:
-            url = "{}/visitadminlist/".format(self.API)
+            url = "{}/visitadminlist".format(self.API)
             response = self.dao.getURL(url)
             visits = [Visit.from_json(v) for v in json.loads(response.data)]
             return visits
@@ -54,7 +55,7 @@ class CompassVisits(object):
         Returns a list of visit options.
         """
         try:
-            url = "{}/visitoptions/".format(self.API)
+            url = "{}/visitoptions".format(self.API)
             response = self.dao.getURL(url)
             options = json.loads(response.data)
             return options

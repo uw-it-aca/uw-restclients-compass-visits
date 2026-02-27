@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1,
+    "student_netid": "javerage",
+    "program_area": "Program Area 1",
+    "tutoring_option": "Tutoring Option 1",
+    "writing_service": "Writing Service 1",
+    "course": "Course 1",
+    "check_in_date": "2024-01-01T00:00:00",
+    "check_out_date": null,
+    "is_verified": false
+  },
+  {
+    "id": 2,
+    "student_netid": "javerage",
+    "program_area": "Program Area 2",
+    "tutoring_option": "Tutoring Option 2",
+    "writing_service": "Writing Service 2",
+    "course": "Course 2",
+    "check_in_date": "2024-01-02T00:00:00",
+    "check_out_date": null,
+    "is_verified": true
+  }
+]
