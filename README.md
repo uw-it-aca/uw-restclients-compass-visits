@@ -1,1 +1,3 @@
 # uw-restclients-compass-visits
+[![tests](https://github.com/uw-it-aca/uw-restclients-compass-visits/actions/workflows/cicd.yml/badge.svg)](https://github.com/uw-it-aca/uw-restclients-compass-visits/actions/workflows/cicd.yml)
+[![Coverage Status](https://coveralls.io/repos/github/uw-it-aca/uw-restclients-compass-visits/badge.svg?branch=main)](https://coveralls.io/github/uw-it-aca/uw-restclients-compass-visits?branch=main)

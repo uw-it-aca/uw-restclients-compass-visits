@@ -2,6 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0\
 
 from restclients_core import models
+import datetime
 
 
 class Visit(models.Model):
@@ -19,10 +20,9 @@ class Visit(models.Model):
         return {
             "id": self.id,
             "student_netid": self.student_netid,
-            "program_area": self.program_area.name,
-            "tutoring_option": self.tutoring_option.name,
-            "writing_service": self.writing_service.name if
-            self.writing_service else None,
+            "program_area": self.program_area,
+            "tutoring_option": self.tutoring_option,
+            "writing_service": self.writing_service,
             "course": self.course,
             "check_in_date": self.check_in_date.isoformat(),
             "check_out_date": self.check_out_date.isoformat() if
@@ -39,7 +39,13 @@ class Visit(models.Model):
             tutoring_option=data.get("tutoring_option"),
             writing_service=data.get("writing_service"),
             course=data.get("course"),
-            check_in_date=data.get("check_in_date"),
-            check_out_date=data.get("check_out_date"),
+            check_in_date=cls._get_dt_from_string(data.get("check_in_date")),
+            check_out_date=cls._get_dt_from_string(data.get("check_out_date")),
             is_verified=data.get("is_verified", False),
         )
+
+    @staticmethod
+    def _get_dt_from_string(date_str):
+        if date_str:
+            return datetime.datetime.fromisoformat(date_str)
+        return None
