@@ -21,17 +21,17 @@ class CompassVisits(object):
     def __init__(self):
         self.dao = COMPASS_VISITS_DAO()
 
-    def get_visits_for_student(self, uwnetid):
+    def get_visits_for_student(self, syskey):
         """
-        Returns a list of visits for the given uw netid.
+        Returns a list of visits for the given syskey.
         """
-        url = "{}/studentvisits/{}".format(self.API, uwnetid)
+        url = "{}/studentvisits/{}".format(self.API, syskey)
         response = self.dao.getURL(url)
         if response.status != 200:
             raise DataFailureException(url,
                                        response.status,
                                        "Error getting visits for student "
-                                       "{}: {}".format(uwnetid,
+                                       "{}: {}".format(syskey,
                                                        response.status))
         visits = [Visit.from_json(v) for v in json.loads(response.data)]
         return visits
@@ -70,7 +70,7 @@ class CompassVisits(object):
         """
         url = "{}/managevisit/".format(self.API)
         response = self.dao.postURL(url,
-                                    data=json.dumps(visit.json_data())
+                                    body=json.dumps(visit.json_data())
                                     )
         if response.status != 200:
             raise DataFailureException(url,
@@ -91,7 +91,8 @@ class CompassVisits(object):
             request_body["checkout"] = checkout
 
         response = self.dao.patchURL(url,
-                                     data=json.dumps(request_body)
+                                     None,
+                                     json.dumps(request_body)
                                      )
         if response.status != 200:
             raise DataFailureException(url,

@@ -116,7 +116,7 @@ class CompassVisitsTestCase(TestCase):
             CompassVisits().admin_create_visit(visit)
             mock_postURL.assert_called_once_with(
                 "/api/v1/managevisit/",
-                data=json.dumps(visit.json_data())
+                body=json.dumps(visit.json_data())
             )
 
     def test_admin_update_visit_success(self):
@@ -140,8 +140,9 @@ class CompassVisitsTestCase(TestCase):
                                                checkout=True)
             mock_patchURL.assert_called_once_with(
                 "/api/v1/managevisit/1",
-                data=json.dumps({'verify': True,
-                                 'checkout': True})
+                None,
+                json.dumps({'verify': True,
+                            'checkout': True})
             )
 
     def test_admin_update_visit_failure(self):
