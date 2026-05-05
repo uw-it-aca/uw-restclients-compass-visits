@@ -50,11 +50,11 @@ class CompassVisits(object):
         visits = [Visit.from_json(v) for v in json.loads(response.data)]
         return visits
 
-    def get_visit_options(self):
+    def get_visit_options(self, uwregid):
         """
-        Returns a list of visit options.
+        Returns a list of visit options for the given UW regid.
         """
-        url = "{}/visitoptions".format(self.API)
+        url = "{}/visitoptions/{}".format(self.API, uwregid)
         response = self.dao.getURL(url)
         if response.status != 200:
             raise DataFailureException(url,

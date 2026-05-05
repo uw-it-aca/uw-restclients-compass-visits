@@ -39,7 +39,10 @@ class CompassVisitsTestCase(TestCase):
                 CompassVisits().get_visit_admin_list()
 
     def test_get_visit_options(self):
-        options = CompassVisits().get_visit_options()
+        javerage_regid = "9136CCB8F66711D5BE060004AC494FFE"
+        nocourse_regid = "NOCOURSESREGID"
+
+        options = CompassVisits().get_visit_options(javerage_regid)
         self.assertIsNotNone(options)
         self.assertIsInstance(options, dict)
         self.assertIn("program_areas", options)
@@ -72,12 +75,19 @@ class CompassVisitsTestCase(TestCase):
         self.assertEqual(options["writing_services"][0]["name"],
                          "Writing Service 1")
 
+        nocourse_options = CompassVisits().get_visit_options(nocourse_regid)
+        self.assertIsNotNone(nocourse_options)
+        self.assertIsInstance(nocourse_options, dict)
+        self.assertIn("courses", nocourse_options)
+        self.assertIsInstance(nocourse_options["courses"], list)
+        self.assertEqual(len(nocourse_options["courses"]), 0)
+
     def test_get_visit_options_failure(self):
         with (mock.patch('uw_compass_visits.dao.COMPASS_VISITS_DAO.getURL')
               as mock_getURL):
             mock_getURL.return_value.status = 500
             with self.assertRaises(DataFailureException):
-                CompassVisits().get_visit_options()
+                CompassVisits().get_visit_options("")
 
     def test_admin_create_visit_failure(self):
         visit = Visit(
