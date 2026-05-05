@@ -7,7 +7,7 @@ import datetime
 
 class Visit(models.Model):
     id = models.IntegerField()
-    student_netid = models.CharField(max_length=255)
+    student_syskey = models.CharField(max_length=255)
     program_area = models.CharField(max_length=255)
     tutoring_option = models.CharField(max_length=255)
     writing_service = models.CharField(max_length=255, null=True, blank=True)
@@ -19,12 +19,13 @@ class Visit(models.Model):
     def json_data(self):
         return {
             "id": self.id,
-            "student_netid": self.student_netid,
+            "student_syskey": self.student_syskey,
             "program_area": self.program_area,
             "tutoring_option": self.tutoring_option,
             "writing_service": self.writing_service,
             "course": self.course,
-            "check_in_date": self.check_in_date.isoformat(),
+            "check_in_date": self.check_in_date.isoformat() if
+            self.check_in_date else None,
             "check_out_date": self.check_out_date.isoformat() if
             self.check_out_date else None,
             "is_verified": self.is_verified,
@@ -34,7 +35,7 @@ class Visit(models.Model):
     def from_json(cls, data):
         return cls(
             id=data.get("id"),
-            student_netid=data.get("student_netid"),
+            student_syskey=data.get("student_syskey"),
             program_area=data.get("program_area"),
             tutoring_option=data.get("tutoring_option"),
             writing_service=data.get("writing_service"),

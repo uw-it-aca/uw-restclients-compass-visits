@@ -11,7 +11,7 @@ class CompassVisitModelTestCase(TestCase):
     def test_compass_visit_model(self):
         visit = models.Visit(
             id=1,
-            student_netid="javerage",
+            student_syskey="000043870",
             program_area="Program Area 1",
             tutoring_option="Tutoring Option 1",
             writing_service="Writing Service 1",
@@ -19,7 +19,7 @@ class CompassVisitModelTestCase(TestCase):
             is_verified=False
         )
         self.assertEqual(visit.id, 1)
-        self.assertEqual(visit.student_netid, "javerage")
+        self.assertEqual(visit.student_syskey, "000043870")
         self.assertEqual(visit.program_area, "Program Area 1")
         self.assertEqual(visit.tutoring_option, "Tutoring Option 1")
         self.assertEqual(visit.writing_service, "Writing Service 1")
@@ -30,7 +30,7 @@ class CompassVisitModelTestCase(TestCase):
 
         json_data = visit.json_data()
         self.assertEqual(json_data["id"], 1)
-        self.assertEqual(json_data["student_netid"], "javerage")
+        self.assertEqual(json_data["student_syskey"], "000043870")
         self.assertEqual(json_data["program_area"], "Program Area 1")
         self.assertEqual(json_data["tutoring_option"], "Tutoring Option 1")
         self.assertEqual(json_data["writing_service"], "Writing Service 1")
@@ -41,7 +41,7 @@ class CompassVisitModelTestCase(TestCase):
     def test_compass_visit_from_json(self):
         json_data = {
             "id": 2,
-            "student_netid": "javerage",
+            "student_syskey": "000043871",
             "program_area": "Program Area 2",
             "tutoring_option": "Tutoring Option 2",
             "writing_service": None,
@@ -52,7 +52,7 @@ class CompassVisitModelTestCase(TestCase):
         }
         visit = models.Visit.from_json(json_data)
         self.assertEqual(visit.id, 2)
-        self.assertEqual(visit.student_netid, "javerage")
+        self.assertEqual(visit.student_syskey, "000043871")
         self.assertEqual(visit.program_area, "Program Area 2")
         self.assertEqual(visit.tutoring_option, "Tutoring Option 2")
         self.assertIsNone(visit.writing_service)

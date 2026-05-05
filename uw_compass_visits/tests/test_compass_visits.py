@@ -92,7 +92,7 @@ class CompassVisitsTestCase(TestCase):
     def test_admin_create_visit_failure(self):
         visit = Visit(
             id=None,
-            student_netid="javerage",
+            student_syskey="000043870",
             program_area="Program Area 1",
             tutoring_option="Tutoring Option 1",
             writing_service="Writing Service 1",
@@ -110,7 +110,7 @@ class CompassVisitsTestCase(TestCase):
     def test_admin_create_visit_success(self):
         visit = Visit(
             id=None,
-            student_netid="javerage",
+            student_syskey="000043870",
             program_area="Program Area 1",
             tutoring_option="Tutoring Option 1",
             writing_service="Writing Service 1",
@@ -132,7 +132,7 @@ class CompassVisitsTestCase(TestCase):
     def test_admin_update_visit_success(self):
         visit = Visit(
             id=1,
-            student_netid="javerage",
+            student_syskey="000043870",
             program_area="Program Area 1",
             tutoring_option="Tutoring Option 1",
             writing_service="Writing Service 1",
@@ -158,7 +158,7 @@ class CompassVisitsTestCase(TestCase):
     def test_admin_update_visit_failure(self):
         visit = Visit(
             id=1,
-            student_netid="javerage",
+            student_syskey="000043870",
             program_area="Program Area 1",
             tutoring_option="Tutoring Option 1",
             writing_service="Writing Service 1",
