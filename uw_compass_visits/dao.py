@@ -14,7 +14,7 @@ class COMPASS_VISITS_DAO(DAO):
         path = [abspath(os.path.join(dirname(__file__), "resources"))]
         return path
 
-    def _custom_headers(self):
+    def _custom_headers(self, method, url, headers, body):
         custom_headers = {}
         token = self.get_service_setting('AUTH_TOKEN')
         if token:
