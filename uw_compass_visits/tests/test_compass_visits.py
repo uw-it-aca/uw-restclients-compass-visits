@@ -24,12 +24,15 @@ class CompassVisitsTestCase(TestCase):
     def test_get_visit_admin_list(self):
         visits = CompassVisits().get_visit_admin_list()
         self.assertIsNotNone(visits)
-        self.assertIsInstance(visits, list)
-        self.assertEqual(len(visits), 2)
-        self.assertEqual(visits[0].id, 1)
-        self.assertTrue(visits[0].is_verified is False)
-        self.assertEqual(visits[1].id, 2)
-        self.assertTrue(visits[1].is_verified is True)
+        self.assertIsInstance(visits, dict)
+        self.assertIn("pending_verification", visits)
+        self.assertIn("verified", visits)
+        self.assertIsInstance(visits["pending_verification"], list)
+        self.assertIsInstance(visits["verified"], list)
+        self.assertEqual(len(visits["pending_verification"]), 1)
+        self.assertEqual(visits["pending_verification"][0].id, 1)
+        self.assertEqual(len(visits["verified"]), 1)
+        self.assertEqual(visits["verified"][0].id, 2)
 
     def test_visitadmin_failure(self):
         with (mock.patch('uw_compass_visits.dao.COMPASS_VISITS_DAO.getURL')
