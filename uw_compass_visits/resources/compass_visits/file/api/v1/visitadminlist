@@ -12,7 +12,7 @@
       "is_verified": false
     }
   ],
-  "verified": [
+  "pending_checkout": [
     {
       "id": 2,
       "student_syskey": "000043871",

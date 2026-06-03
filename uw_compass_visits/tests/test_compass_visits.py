@@ -26,13 +26,13 @@ class CompassVisitsTestCase(TestCase):
         self.assertIsNotNone(visits)
         self.assertIsInstance(visits, dict)
         self.assertIn("pending_verification", visits)
-        self.assertIn("verified", visits)
+        self.assertIn("pending_checkout", visits)
         self.assertIsInstance(visits["pending_verification"], list)
-        self.assertIsInstance(visits["verified"], list)
+        self.assertIsInstance(visits["pending_checkout"], list)
         self.assertEqual(len(visits["pending_verification"]), 1)
         self.assertEqual(visits["pending_verification"][0].id, 1)
-        self.assertEqual(len(visits["verified"]), 1)
-        self.assertEqual(visits["verified"][0].id, 2)
+        self.assertEqual(len(visits["pending_checkout"]), 1)
+        self.assertEqual(visits["pending_checkout"][0].id, 2)
 
     def test_visitadmin_failure(self):
         with (mock.patch('uw_compass_visits.dao.COMPASS_VISITS_DAO.getURL')
@@ -153,7 +153,7 @@ class CompassVisitsTestCase(TestCase):
                                                checkout=True)
             mock_patchURL.assert_called_once_with(
                 "/api/v1/managevisit/1",
-                None,
+                {},
                 json.dumps({'verify': True,
                             'checkout': True})
             )

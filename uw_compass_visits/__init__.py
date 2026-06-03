@@ -25,7 +25,7 @@ class CompassVisits(object):
         """
         Returns a list of visits for the given syskey.
         """
-        url = "{}/studentvisits/{}/".format(self.API, syskey)
+        url = "{}/studentvisits/{}".format(self.API, syskey)
         response = self.dao.getURL(url)
         if response.status != 200:
             raise DataFailureException(url,
@@ -40,7 +40,7 @@ class CompassVisits(object):
         """
         Returns a list of all visits for admin users.
         """
-        url = "{}/visitadminlist/".format(self.API)
+        url = "{}/visitadminlist".format(self.API)
         response = self.dao.getURL(url)
         if response.status != 200:
             raise DataFailureException(url,
@@ -54,14 +54,13 @@ class CompassVisits(object):
                     visit_response.get("pending_checkout", [])]
         visits = {'pending_verification': pending_verification,
                   'pending_checkout': verified}
-        print(visits)
         return visits
 
     def get_visit_options(self, uwregid):
         """
         Returns a list of visit options for the given UW regid.
         """
-        url = "{}/visitoptions/{}/".format(self.API, uwregid)
+        url = "{}/visitoptions/{}".format(self.API, uwregid)
         response = self.dao.getURL(url)
         if response.status != 200:
             raise DataFailureException(url,
@@ -90,7 +89,7 @@ class CompassVisits(object):
         """
         Allows an admin user to update an existing visit.
         """
-        url = "{}/managevisit/{}/".format(self.API, visit_id)
+        url = "{}/managevisit/{}".format(self.API, visit_id)
         request_body = {}
         if verify is not None:
             request_body["verify"] = verify
@@ -112,7 +111,7 @@ class CompassVisits(object):
         """
         Allows an admin user to delete an existing visit.
         """
-        url = "{}/managevisit/{}/".format(self.API, visit_id)
+        url = "{}/managevisit/{}".format(self.API, visit_id)
         response = self.dao.deleteURL(url)
         if response.status != 200:
             raise DataFailureException(url,
