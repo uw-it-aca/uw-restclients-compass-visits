@@ -47,7 +47,13 @@ class CompassVisits(object):
                                        response.status,
                                        "Error getting admin visit list: "
                                        "{}".format(response.status))
-        visits = [Visit.from_json(v) for v in json.loads(response.data)]
+        visit_response = json.loads(response.data)
+        pending_verification = [Visit.from_json(v) for v in visit_response
+                                .get("pending_verification", [])]
+        verified = [Visit.from_json(v) for v in
+                    visit_response.get("pending_checkout", [])]
+        visits = {'pending_verification': pending_verification,
+                  'pending_checkout': verified}
         return visits
 
     def get_visit_options(self, uwregid):
@@ -91,7 +97,7 @@ class CompassVisits(object):
             request_body["checkout"] = checkout
 
         response = self.dao.patchURL(url,
-                                     None,
+                                     {},
                                      json.dumps(request_body)
                                      )
         if response.status != 200:
